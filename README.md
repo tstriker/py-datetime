@@ -4,6 +4,7 @@ The Python datetime handling is not perfect, but it's certainly much better and 
 This tiny lib emulates most of the functions of [Python's datetime lib](https://docs.python.org/2/library/datetime.html).
 It tries to stay as close to the python API as possible. Ideal if you are working with both Python and ES projects.
 Hope you'll find it useful!
+Live console here: https://npm.runkit.com/py-datetime
 
 # Install
 
