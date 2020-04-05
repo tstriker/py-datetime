@@ -1,7 +1,7 @@
 # Python-style datetime handling lib for ES6
 
-The Python datetime handling is not perfect, but it's certainly much better and simpler than what we have in JavaScript.
-This tiny lib emulates most of the functions of [Python's datetime lib](https://docs.python.org/2/library/datetime.html).
+The Python datetime handling is not perfect, but it's certainly much better and simpler than what there is in JavaScript.
+This tiny lib emulates most of the main functions of [Python's datetime lib](https://docs.python.org/2/library/datetime.html).
 It tries to stay as close to the python API as possible. Ideal if you are working with both Python and ES projects.
 Hope you'll find it useful!
 Live console here: https://npm.runkit.com/py-datetime
@@ -26,7 +26,7 @@ console.log("Minutes since midnight:", dt.timedelta(now - today).totalSeconds() 
 * `dt.timedelta(days, [seconds, [milliseconds..)` constructor can't really guess whether you are passing in a day or a result
   from date math (as dt - dt in javascript will return an int), so i've arbitrarily put in a condition where if it's under
   900, we treat it as days, but otherwise it's millis (1000 millis = 1 sec). For most cases you should be fine, but you can
-  always be explicity about it to avoid confusion: `dt.timedelta({days: ..})` and `dt.timedelta({millisesconds: ..}), respectively
+  be explicit about it to avoid confusion: `dt.timedelta({days: ..})` and `dt.timedelta({millisesconds: ..}), respectively.
 * don't forget to plug in the `new` operator when you are creating new things, as that's how it is in javascrip.
 * use `.str()` to get string representation of the object. JavaScript's `toString()` will return Unix epoch.
 
