@@ -1,0 +1,32 @@
+{
+  "name": "py-datetime",
+  "version": "0.0.1",
+  "description": "Datetime handling the python way (or as close as possible)",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "d3-time-format": "^2.2.3"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tstriker/py-datetime.git"
+  },
+  "keywords": [
+    "datetime",
+    "python",
+    "date",
+    "time",
+    "timedelta"
+  ],
+  "author": "Tom Striker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tstriker/py-datetime/issues"
+  },
+  "homepage": "https://github.com/tstriker/py-datetime#readme"
+}
