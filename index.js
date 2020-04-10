@@ -43,6 +43,9 @@ class time {
         return this.__totalMillis;
     }
 }
+function timeWrapper(hour, minute, second, millisecond) {
+    return new time(hour, minute, second, millisecond);
+}
 
 class date {
     constructor(year, month, day) {
@@ -67,6 +70,10 @@ class date {
         return this.__totalMillis;
     }
 }
+function dateWrapper(year, month, day) {
+    return new date(year, month, day);
+}
+
 
 class datetime {
     constructor(year, month, day, hour, minute, second, millisecond) {
@@ -150,20 +157,24 @@ class datetime {
         return new date(this.year, this.month, this.day);
     }
 
-    static strptime(dateString, format) {
-        return new datetime(d3TimeFormat.timeParse(format)(dateString));
-    }
-
-    static now() {
-        return new datetime(new Date());
-    }
-
-    static combine(date, time) {
-        date = new datetime(date);
-        Object.assign(date, time);
-        return date;
-    }
 }
+
+
+function datetimeWrapper(year, month, day, hour, minute, second, millisecond) {
+    return new datetime(year, month, day, hour, minute, second, millisecond);
+}
+datetimeWrapper.strptime = (dateString, format) => {
+    return new datetime(d3TimeFormat.timeParse(format)(dateString));
+}
+datetimeWrapper.now = () => {
+    return new datetime(new Date());
+}
+datetimeWrapper.combine = (date, time) => {
+    date = new datetime(date);
+    Object.assign(date, time);
+    return date;
+}
+
 
 class timedelta {
     constructor(days, seconds, milliseconds, minutes, hours, weeks) {
@@ -208,11 +219,14 @@ class timedelta {
         return this.__totalMillis / 1000;
     }
 }
+function timedeltaWrapper(days, seconds, milliseconds, minutes, hours, weeks) {
+    return new timedelta(days, seconds, milliseconds, minutes, hours, weeks)
+}
 
 const dt = {
-    datetime,
-    time,
-    date,
-    timedelta,
+    datetime: datetimeWrapper,
+    time: timeWrapper,
+    date: dateWrapper,
+    timedelta: timedeltaWrapper,
 };
 module.exports = dt;
