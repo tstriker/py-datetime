@@ -27,7 +27,6 @@ console.log("Minutes since midnight:", dt.timedelta(now - today).totalSeconds() 
   900 we treat it as days, but otherwise it's millis (1000 millis = 1 sec). For most cases this should work just fine, but
   where disambiguation is required, you can be be explicit about it: `dt.timedelta({days: ..})` and
   `dt.timedelta({millisesconds: ..}), respectively.
-* don't forget to plug in the `new` operator when you are creating new things, as that's how it's done in javascrip.
 * use `.str()` to get string representation of the object. JavaScript's `toString()` will return Unix epoch.
 
 
