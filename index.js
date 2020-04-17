@@ -182,7 +182,7 @@ class timedelta {
         if (typeof days != "number") {
             // we have a dict
             args = days;
-        } else if (days > 900) {
+        } else if (Math.abs(days) > 900) {
             // we have millis, let's deconstruct into days, hours, minutes, seconds, milliseconds
             let totalMillis = days;
             args = {};
