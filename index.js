@@ -37,9 +37,7 @@ class time {
         );
     }
 
-    toString() {
-        // javascripts toString is not python's str/repr as it's used when you perform math operations on items
-        // as such we want milliseconds here instead
+    valueOf() {
         return this.__totalMillis;
     }
 }
@@ -64,9 +62,7 @@ class date {
         return this.jsDate.getTime();
     }
 
-    toString() {
-        // javascripts toString is not python's str/repr as it's used when you perform math operations on items
-        // as such we want milliseconds here instead
+    valueOf() {
         return this.__totalMillis;
     }
 }
@@ -141,7 +137,7 @@ class datetime {
         return d3TimeFormat.timeFormat("%Y-%m-%d %H:%M:%S.%f")(this.jsDate);
     }
 
-    toString() {
+    valueOf() {
         return this.jsDate.getTime();
     }
 
@@ -211,7 +207,7 @@ class timedelta {
         return d3TimeFormat.timeFormat("%H:%M:%S.%f")(new Date(this));
     }
 
-    toString() {
+    valueOf() {
         return this.__totalMillis;
     }
 
