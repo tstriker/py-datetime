@@ -40,6 +40,10 @@ class time {
     valueOf() {
         return this.__totalMillis;
     }
+
+    toString() {
+        return this.str();
+    }
 }
 function timeWrapper(hour, minute, second, millisecond) {
     return new time(hour, minute, second, millisecond);
@@ -64,6 +68,10 @@ class date {
 
     valueOf() {
         return this.__totalMillis;
+    }
+
+    toString() {
+        return this.str();
     }
 }
 function dateWrapper(year, month, day) {
@@ -141,6 +149,10 @@ class datetime {
         return this.jsDate.getTime();
     }
 
+    toString() {
+        return this.str();
+    }
+
     strftime(format) {
         return d3TimeFormat.timeFormat(format)(this.jsDate);
     }
@@ -209,6 +221,10 @@ class timedelta {
 
     valueOf() {
         return this.__totalMillis;
+    }
+
+    toString() {
+        return this.str();
     }
 
     totalSeconds() {
