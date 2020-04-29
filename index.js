@@ -62,6 +62,15 @@ class date {
         return d3TimeFormat.timeFormat("%Y-%m-%d")(this.jsDate);
     }
 
+    weekday() {
+        // javascript week starts on sunday, while python one starts on monday
+        return ((this.jsDate.getDay() + 6) % 7);
+    }
+
+    isoweekday() {
+        return this.weekday() + 1;
+    }
+
     get __totalMillis() {
         return this.jsDate.getTime();
     }
@@ -165,6 +174,15 @@ class datetime {
         return new date(this.year, this.month, this.day);
     }
 
+
+    weekday() {
+        // javascript week starts on sunday, while python one starts on monday
+        return this.date().weekday();
+    }
+
+    isoweekday() {
+        return this.weekday() + 1;
+    }
 }
 
 
