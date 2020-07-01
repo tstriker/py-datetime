@@ -194,7 +194,7 @@ datetimeWrapper.strptime = (dateString, format) => {
     if (!parsed) {
         throw(`ValueError: time data '${dateString}' does not match format '${format}'`)
     }
-    return new datetime(d3TimeFormat.timeParse(format));
+    return new datetime(parsed);
 }
 datetimeWrapper.now = () => {
     return new datetime(new Date());
