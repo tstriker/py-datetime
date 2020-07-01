@@ -190,7 +190,11 @@ function datetimeWrapper(year, month, day, hour, minute, second, millisecond) {
     return new datetime(year, month, day, hour, minute, second, millisecond);
 }
 datetimeWrapper.strptime = (dateString, format) => {
-    return new datetime(d3TimeFormat.timeParse(format)(dateString));
+    let parsed = d3TimeFormat.timeParse(format)(dateString);
+    if (!parsed) {
+        throw(`ValueError: time data '${dateString}' does not match format '${format}'`)
+    }
+    return new datetime(d3TimeFormat.timeParse(format));
 }
 datetimeWrapper.now = () => {
     return new datetime(new Date());
