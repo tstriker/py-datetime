@@ -1,6 +1,6 @@
 {
   "name": "py-datetime",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Datetime handling the python way (or as close as possible)",
   "main": "index.js",
   "scripts": {

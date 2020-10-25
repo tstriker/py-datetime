@@ -89,8 +89,9 @@ function dateWrapper(year, month, day) {
 
 
 class datetime {
-    constructor(year, month, day, hour, minute, second, millisecond) {
+    constructor(year, month, day, hour, minute, second, millisecond, utc) {
         let args = {};
+        this.utc = utc;
 
         if (typeof year == "number" && !month && !day) {
             // while a dt.datetime(2020) is perfectly valid, it's quite unlikely.
@@ -99,7 +100,7 @@ class datetime {
         }
 
         if (year instanceof datetime || year instanceof date) {
-            (["year", "month", "day", "hour", "minute", "second", "millisecond"]).forEach((field) => {
+            (["year", "month", "day", "hour", "minute", "second", "millisecond", "utc"]).forEach((field) => {
                 let ts = year;
                 args[field] = ts[field];
             });
@@ -139,20 +140,20 @@ class datetime {
     }
 
     get jsDate() {
-        return new Date(
-            this.year,
-            this.month - 1,
-            this.day || 1,
-            this.hour || 0,
-            this.minute || 0,
-            this.second || 0,
-            this.millisecond || 0,
-        );
-    }
-
-    get utcDate() {
-        return new Date(
-            Date.UTC(
+        if (this.utc) {
+            return new Date(
+                Date.UTC(
+                    this.year,
+                    this.month - 1,
+                    this.day || 1,
+                    this.hour || 0,
+                    this.minute || 0,
+                    this.second || 0,
+                    this.millisecond || 0,
+                )
+            );
+        } else {
+            return new Date(
                 this.year,
                 this.month - 1,
                 this.day || 1,
@@ -160,8 +161,8 @@ class datetime {
                 this.minute || 0,
                 this.second || 0,
                 this.millisecond || 0,
-            )
-        );
+            );
+        }
     }
 
     str() {
@@ -228,6 +229,7 @@ datetimeWrapper.utc = (ts) => {
         ts.getUTCMinutes(),
         ts.getUTCSeconds(),
         ts.getUTCMilliseconds(),
+        true
     );
 }
 

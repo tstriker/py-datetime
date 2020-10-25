@@ -41,8 +41,9 @@ Note: all objects evaluate to milliseconds, meaning `dt.datetime.now() + 0` will
 * `dt.datetime(jsDate)` - you can also pass in a JavaScript Date object
 * `dt.datetime(unixEpoch)` - this will also work
 * `dt.datetime(datetime)` - this will clone an existing datetime object)
-* `dt.datetime.strptime(dateString, format)` - parse given date string into a new datetime. Format uses posix parsing
-  see [d3-time-format](https://github.com/d3/d3-time-format#locale_format) for details
+* `dt.datetime.strptime(dateString, format, utc)` - parse given date string into a new datetime. Format uses posix parsing
+  see [d3-time-format](https://github.com/d3/d3-time-format#locale_format) for details. The third param is an optional
+  boolean. When set to true, dateString will be assumed to be in UTC.
 * `dt.datetime.now()` - return current time
 * `dt.datetime.combine(date, time)` - combines passed in `dt.date` or `dt.datetime` with the passed in `dt.time` to create a new datetime
 * `datetime.replace(year, month, day, hour, minute, second, millisecond)` returns a new datetime with items replaced as requested
@@ -67,3 +68,17 @@ Note: all objects evaluate to milliseconds, meaning `dt.datetime.now() + 0` will
   you can do `dt.timedelta(dateA - dateB)`. See gotchas higher up for the 900 thing.
 * `timedelta.totalSeconds()` - returns total seconds between the two times.
 * `timedelta.str()` returns analog of python's `str(time)`, which is `%H:%M:%S.%f`
+
+
+# Dealing with UTC
+
+py-datetime is timezone naive, but dates and times around daylight savings can get bit iffy. There are two functions
+that help mitigate that
+
+* `dt.datetime.utc()` - pass in JS datetime in UTC timezone. the datetime object will be marked as operating in UTC
+* `dt.datetime.strptime` - if you pass in the date string in UTC, make sure to specify the third optional param to `true`.
+  from there on out this date object will be marked as operating in UTC.
+
+Be mindful around datemath, e.g. `z = dt.datetime(dt.datetime.utc() + dt.timedelta(1))` will lose the UTC information, so
+you should do `z.utc = true` after that. I know, the API is bit sucky at the moment, have to ponder on it.
+If you have any good ideas - pull requests welcome!
