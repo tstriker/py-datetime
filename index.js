@@ -150,6 +150,20 @@ class datetime {
         );
     }
 
+    get utcDate() {
+        return new Date(
+            Date.UTC(
+                this.year,
+                this.month - 1,
+                this.day || 1,
+                this.hour || 0,
+                this.minute || 0,
+                this.second || 0,
+                this.millisecond || 0,
+            )
+        );
+    }
+
     str() {
         return d3TimeFormat.timeFormat("%Y-%m-%d %H:%M:%S.%f")(this.jsDate);
     }
@@ -189,12 +203,13 @@ class datetime {
 function datetimeWrapper(year, month, day, hour, minute, second, millisecond) {
     return new datetime(year, month, day, hour, minute, second, millisecond);
 }
-datetimeWrapper.strptime = (dateString, format) => {
-    let parsed = d3TimeFormat.timeParse(format)(dateString);
+datetimeWrapper.strptime = (dateString, format, utc) => {
+    let parser = utc ? d3TimeFormat.utcParse : d3TimeFormat.timeParse;
+    let parsed = parser(format)(dateString);
     if (!parsed) {
         throw(`ValueError: time data '${dateString}' does not match format '${format}'`)
     }
-    return new datetime(parsed);
+    return utc ? datetimeWrapper.utc(parsed) : new datetime(parsed);
 }
 datetimeWrapper.now = () => {
     return new datetime(new Date());
@@ -204,7 +219,17 @@ datetimeWrapper.combine = (date, time) => {
     Object.assign(date, time);
     return date;
 }
-
+datetimeWrapper.utc = (ts) => {
+    return new datetime(
+        ts.getUTCFullYear(),
+        ts.getUTCMonth() + 1,
+        ts.getUTCDate(),
+        ts.getUTCHours(),
+        ts.getUTCMinutes(),
+        ts.getUTCSeconds(),
+        ts.getUTCMilliseconds(),
+    );
+}
 
 class timedelta {
     constructor(days, seconds, milliseconds, minutes, hours, weeks) {
