@@ -75,10 +75,10 @@ Note: all objects evaluate to milliseconds, meaning `dt.datetime.now() + 0` will
 py-datetime is timezone naive, but dates and times around daylight savings can get bit iffy. There are two functions
 that help mitigate that
 
-* `dt.datetime.utc()` - pass in JS datetime in UTC timezone. the datetime object will be marked as operating in UTC
+* `dt.datetime.utc()` - pass in JS datetime in UTC timezone or unix epoch. the datetime object will be marked as operating in UTC
 * `dt.datetime.strptime` - if you pass in the date string in UTC, make sure to specify the third optional param to `true`.
   from there on out this date object will be marked as operating in UTC.
 
-Be mindful around datemath, e.g. `z = dt.datetime(dt.datetime.utc() + dt.timedelta(1))` will lose the UTC information, so
-you should do `z.utc = true` after that. I know, the API is bit sucky at the moment, have to ponder on it.
-If you have any good ideas - pull requests welcome!
+Be mindful around datemath, e.g. `z = dt.datetime(dt.datetime.utc(someDate) + dt.timedelta(1))` will lose the UTC information, so
+you should do `z = dt.datetime.utc(dt.datetime.utc(someDate) + dt.timedelta(1))`.
+The API is bit sucky at the moment, so if you have any good ideas - pull requests welcome!

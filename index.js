@@ -141,17 +141,7 @@ class datetime {
 
     get jsDate() {
         if (this.utc) {
-            return new Date(
-                Date.UTC(
-                    this.year,
-                    this.month - 1,
-                    this.day || 1,
-                    this.hour || 0,
-                    this.minute || 0,
-                    this.second || 0,
-                    this.millisecond || 0,
-                )
-            );
+            return new Date(this.valueOf());
         } else {
             return new Date(
                 this.year,
@@ -170,7 +160,19 @@ class datetime {
     }
 
     valueOf() {
-        return this.jsDate.getTime();
+        if (this.utc) {
+            return Date.UTC(
+                this.year,
+                this.month - 1,
+                this.day || 1,
+                this.hour || 0,
+                this.minute || 0,
+                this.second || 0,
+                this.millisecond || 0,
+            )
+        } else {
+            return this.jsDate.getTime();
+        }
     }
 
     toString() {
@@ -221,6 +223,11 @@ datetimeWrapper.combine = (date, time) => {
     return date;
 }
 datetimeWrapper.utc = (ts) => {
+    if (typeof ts == "number") {
+        // while a dt.datetime(2020) is perfectly valid, it's quite unlikely.
+        // much more unlikely than having gotten an epoch passed in. convert that to date
+        ts = new Date(ts);
+    }
     return new datetime(
         ts.getUTCFullYear(),
         ts.getUTCMonth() + 1,
