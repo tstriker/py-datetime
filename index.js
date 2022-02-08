@@ -16,7 +16,7 @@ class time {
             // we have a dict
             args = hour;
         }
-        (["hour", "minute", "second", "millisecond"]).forEach((field) => {
+        ["hour", "minute", "second", "millisecond"].forEach(field => {
             args[field] = args[field] || 0;
         });
         Object.assign(this, args);
@@ -24,7 +24,7 @@ class time {
 
     str() {
         // we have to set the date to today to avoid any daylight saving nonsense
-        let ts = dt.datetime.combine(dt.datetime.now(), this)
+        let ts = dt.datetime.combine(dt.datetime.now(), this);
         return d3TimeFormat.timeFormat("%H:%M:%S.%f")(new Date(ts));
     }
 
@@ -64,7 +64,7 @@ class date {
 
     weekday() {
         // javascript week starts on sunday, while python one starts on monday
-        return ((this.jsDate.getDay() + 6) % 7);
+        return (this.jsDate.getDay() + 6) % 7;
     }
 
     isoweekday() {
@@ -87,7 +87,6 @@ function dateWrapper(year, month, day) {
     return new date(year, month, day);
 }
 
-
 class datetime {
     constructor(year, month, day, hour, minute, second, millisecond, utc) {
         let args = {};
@@ -99,8 +98,8 @@ class datetime {
             year = new Date(year);
         }
 
-        if (year instanceof datetime || year instanceof date) {
-            (["year", "month", "day", "hour", "minute", "second", "millisecond", "utc"]).forEach((field) => {
+        if (year.year && year.month && year.day) {
+            ["year", "month", "day", "hour", "minute", "second", "millisecond", "utc"].forEach(field => {
                 let ts = year;
                 args[field] = ts[field];
             });
@@ -150,7 +149,7 @@ class datetime {
                 this.hour || 0,
                 this.minute || 0,
                 this.second || 0,
-                this.millisecond || 0,
+                this.millisecond || 0
             );
         }
     }
@@ -168,8 +167,8 @@ class datetime {
                 this.hour || 0,
                 this.minute || 0,
                 this.second || 0,
-                this.millisecond || 0,
-            )
+                this.millisecond || 0
+            );
         } else {
             return this.jsDate.getTime();
         }
@@ -191,7 +190,6 @@ class datetime {
         return new date(this.year, this.month, this.day);
     }
 
-
     weekday() {
         // javascript week starts on sunday, while python one starts on monday
         return this.date().weekday();
@@ -202,7 +200,6 @@ class datetime {
     }
 }
 
-
 function datetimeWrapper(year, month, day, hour, minute, second, millisecond) {
     return new datetime(year, month, day, hour, minute, second, millisecond);
 }
@@ -210,19 +207,19 @@ datetimeWrapper.strptime = (dateString, format, utc) => {
     let parser = utc ? d3TimeFormat.utcParse : d3TimeFormat.timeParse;
     let parsed = parser(format)(dateString);
     if (!parsed) {
-        throw(`ValueError: time data '${dateString}' does not match format '${format}'`)
+        throw `ValueError: time data '${dateString}' does not match format '${format}'`;
     }
     return utc ? datetimeWrapper.utc(parsed) : new datetime(parsed);
-}
+};
 datetimeWrapper.now = () => {
     return new datetime(new Date());
-}
+};
 datetimeWrapper.combine = (date, time) => {
     date = new datetime(date);
     Object.assign(date, time);
     return date;
-}
-datetimeWrapper.utc = (ts) => {
+};
+datetimeWrapper.utc = ts => {
     if (typeof ts == "number") {
         // while a dt.datetime(2020) is perfectly valid, it's quite unlikely.
         // much more unlikely than having gotten an epoch passed in. convert that to date
@@ -238,7 +235,7 @@ datetimeWrapper.utc = (ts) => {
         ts.getUTCMilliseconds(),
         true
     );
-}
+};
 
 class timedelta {
     constructor(days, seconds, milliseconds, minutes, hours, weeks) {
@@ -250,7 +247,7 @@ class timedelta {
             // we have millis, let's deconstruct into days, hours, minutes, seconds, milliseconds
             let totalMillis = days;
             args = {};
-            (["days", "hours", "minutes", "seconds", "milliseconds"]).forEach((key) => {
+            ["days", "hours", "minutes", "seconds", "milliseconds"].forEach(key => {
                 let multiplier = toMillis[key];
                 let val = Math.floor(totalMillis / multiplier);
                 if (val) {
@@ -260,14 +257,14 @@ class timedelta {
             });
         }
 
-        (["weeks", "days", "hours", "minutes", "seconds", "milliseconds"]).forEach((key) => {
+        ["weeks", "days", "hours", "minutes", "seconds", "milliseconds"].forEach(key => {
             this[key] = args[key] || 0;
         });
     }
 
     get __totalMillis() {
         let tsFields = ["weeks", "days", "hours", "minutes", "seconds", "milliseconds"];
-        let millis = tsFields.map((field) => this[field] * toMillis[field]);
+        let millis = tsFields.map(field => this[field] * toMillis[field]);
         return millis.reduce((total, current) => total + current);
     }
 
@@ -288,7 +285,7 @@ class timedelta {
     }
 }
 function timedeltaWrapper(days, seconds, milliseconds, minutes, hours, weeks) {
-    return new timedelta(days, seconds, milliseconds, minutes, hours, weeks)
+    return new timedelta(days, seconds, milliseconds, minutes, hours, weeks);
 }
 
 const dt = {

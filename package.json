@@ -1,16 +1,16 @@
 {
   "name": "py-datetime",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Datetime handling the python way (or as close as possible)",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "d3-time-format": "^2.2.3"
+    "d3-time-format": "^4.1.0"
   },
   "devDependencies": {
-    "mocha": "^7.1.1"
+    "mocha": "^9.2.0"
   },
   "repository": {
     "type": "git",
