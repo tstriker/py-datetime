@@ -219,7 +219,7 @@ datetimeWrapper.now = () => {
     return new datetime(new Date());
 };
 datetimeWrapper.utcnow = () => {
-    return datetime.utc(new Date());
+    return datetimeWrapper.utc(new Date());
 };
 datetimeWrapper.combine = (date, time) => {
     date = new datetime(date);
