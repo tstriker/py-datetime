@@ -224,6 +224,8 @@ datetimeWrapper.utc = ts => {
         // while a dt.datetime(2020) is perfectly valid, it's quite unlikely.
         // much more unlikely than having gotten an epoch passed in. convert that to date
         ts = new Date(ts);
+    } else if (ts instanceof datetime) {
+        ts = ts.jsDate;
     }
     return new datetime(
         ts.getUTCFullYear(),
