@@ -179,7 +179,11 @@ class datetime {
     }
 
     strftime(format) {
-        return d3TimeFormat.timeFormat(format)(this.jsDate);
+        if (this.utc) {
+            return d3TimeFormat.utcFormat(format)(this.jsDate);
+        } else {
+            return d3TimeFormat.timeFormat(format)(this.jsDate);
+        }
     }
 
     time() {
@@ -213,6 +217,9 @@ datetimeWrapper.strptime = (dateString, format, utc) => {
 };
 datetimeWrapper.now = () => {
     return new datetime(new Date());
+};
+datetimeWrapper.utcnow = () => {
+    return datetime.utc(new Date());
 };
 datetimeWrapper.combine = (date, time) => {
     date = new datetime(date);
