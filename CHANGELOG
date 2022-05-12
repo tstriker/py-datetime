@@ -1,0 +1,13 @@
+0.8.0
+======
+
+Reckon this one needs some sort of changelog entry.
+When datetime is in UTC the strftime now returns the correct UTC representation
+instead of reverting back to local timezone.
+If your code relies on the previous interpretation, you can just wrap the utc
+date in a new datetime object and lose the utc flag, like this:
+
+```
+- utc_dt.strftime
++ dt.datetime(utc_dt).strtfime
+```

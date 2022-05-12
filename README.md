@@ -45,6 +45,7 @@ Note: all objects evaluate to milliseconds, meaning `dt.datetime.now() + 0` will
   see [d3-time-format](https://github.com/d3/d3-time-format#locale_format) for details. The third param is an optional
   boolean. When set to true, dateString will be assumed to be in UTC.
 * `dt.datetime.now()` - return current time
+* `dt.datetime.utcnow()` - return current time in UTC
 * `dt.datetime.combine(date, time)` - combines passed in `dt.date` or `dt.datetime` with the passed in `dt.time` to create a new datetime
 * `datetime.replace(year, month, day, hour, minute, second, millisecond)` returns a new datetime with items replaced as requested
 * `datetime.jsDate` property returns JavaScript Date object representing the datetime
