@@ -1,3 +1,11 @@
+0.8.3
+======
+
+* add .toJSON functions to all datetime objects so that JSON.stringify would
+  convert respective datetime/date/time/timedelta to its string representation
+  rather than an object. preferable as is more standard that a deserialized
+  object
+
 0.8.0
 ======
 

@@ -44,6 +44,10 @@ class time {
     toString() {
         return this.str();
     }
+
+    toJSON() {
+        return this.str();
+    }
 }
 function timeWrapper(hour, minute, second, millisecond) {
     return new time(hour, minute, second, millisecond);
@@ -80,6 +84,10 @@ class date {
     }
 
     toString() {
+        return this.str();
+    }
+
+    toJSON() {
         return this.str();
     }
 }
@@ -175,6 +183,10 @@ class datetime {
     }
 
     toString() {
+        return this.str();
+    }
+
+    toJSON() {
         return this.str();
     }
 
@@ -286,6 +298,10 @@ class timedelta {
     }
 
     toString() {
+        return this.str();
+    }
+
+    toJSON() {
         return this.str();
     }
 
