@@ -1,4 +1,4 @@
-var d3TimeFormat = require("d3-time-format");
+import * as d3TimeFormat from "./node_modules/d3-time-format";
 
 let toMillis = {
     milliseconds: 1,
@@ -319,4 +319,5 @@ const dt = {
     date: dateWrapper,
     timedelta: timedeltaWrapper,
 };
-module.exports = dt;
+
+export default dt;
