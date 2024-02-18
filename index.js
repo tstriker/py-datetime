@@ -163,7 +163,7 @@ class datetime {
     }
 
     str() {
-        return d3TimeFormat.timeFormat("%Y-%m-%d %H:%M:%S.%f")(this.jsDate);
+        return this.strftime("%Y-%m-%d %H:%M:%S.%f");
     }
 
     valueOf() {

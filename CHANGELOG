@@ -1,3 +1,10 @@
+0.8.4
+======
+
+* when converting a UTC datetime to string, respect the utc setting
+  (previously ended up with local timezone)
+
+
 0.8.3
 ======
 
