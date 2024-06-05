@@ -1,3 +1,9 @@
+0.9
+======
+
+* switch from requires to import for the d3.timeFormat dependency; bumping
+  version just in the off-chance this causes explodes
+
 0.8.4
 ======
 

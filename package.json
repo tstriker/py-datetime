@@ -1,32 +1,33 @@
 {
-  "name": "py-datetime",
-  "version": "0.8.4",
-  "description": "Datetime handling the python way (or as close as possible)",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "d3-time-format": "^4.1.0"
-  },
-  "devDependencies": {
-    "mocha": "^9.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tstriker/py-datetime.git"
-  },
-  "keywords": [
-    "datetime",
-    "python",
-    "date",
-    "time",
-    "timedelta"
-  ],
-  "author": "Tom Striker",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tstriker/py-datetime/issues"
-  },
-  "homepage": "https://github.com/tstriker/py-datetime#readme"
+    "name": "py-datetime",
+    "type": "module",
+    "version": "0.9",
+    "description": "Datetime handling the python way (or as close as possible)",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "dependencies": {
+        "d3-time-format": "^4.1.0"
+    },
+    "devDependencies": {
+        "mocha": "^9.2.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tstriker/py-da.git"
+    },
+    "keywords": [
+        "datetime",
+        "python",
+        "date",
+        "time",
+        "timedelta"
+    ],
+    "author": "Tom Striker",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/tstriker/py-datetime/issues"
+    },
+    "homepage": "https://github.com/tstriker/py-datetime#readme"
 }
